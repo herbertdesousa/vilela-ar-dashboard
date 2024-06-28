@@ -1,0 +1,13 @@
+.switch {
+  @apply font-medium text-accent-6
+}
+
+.switch-indicator {
+  z-index: -1;
+  @apply absolute bottom-1 bg-accent-0 rounded transition
+}
+
+.switch-bg {
+  z-index: -2;
+  @apply absolute bottom-0.5 bg-accent-1 pl-0.5 pt-0.5 rounded
+}

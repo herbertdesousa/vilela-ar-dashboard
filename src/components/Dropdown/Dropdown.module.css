@@ -1,0 +1,15 @@
+.root {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.04);
+  z-index: 1000;
+  @apply rounded bg-accent-0 border border-accent-2 mt-1 w-full absolute
+}
+
+.root-open {
+  opacity: 1;
+  transition: all 100ms linear;
+}
+
+.root-close {
+  opacity: 0;
+  transition: all 100ms linear;
+}

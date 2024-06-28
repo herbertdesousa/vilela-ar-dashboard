@@ -1,0 +1,26 @@
+.text-field {
+  @apply border border-accent-2 transition rounded py-2 px-4 w-full text-accent-6
+}
+
+.text-field:disabled {
+  @apply bg-accent-1 border-accent-2
+}
+
+.text-field-textarea {
+  height: 120px;
+  @apply resize-none
+}
+
+.text-field-focus {
+  box-shadow: 0 0 1px 2px rgba(75, 158, 234, 0.2);
+  @apply border-primary
+}
+
+.text-field-filled {
+  @apply border-accent-3
+}
+
+.text-field-error {
+  box-shadow: 0 0 1px 2px rgba(187, 19, 19, 0.2);
+  @apply border-red
+}

@@ -1,0 +1,65 @@
+:root {
+  --primary: #4B9EEA;
+  --dark-primary: #4B91D0;
+
+  --green: #07BC4C;
+  --red: #BB1313;
+
+  --accent-6: #27282C;
+  --accent-5: #383A3F;
+  --accent-4: #4C4C52;
+  --accent-3: #B8B9BD;
+  --accent-2: #E4E5E7;
+  --accent-1: #F5F5F5;
+  --accent-0: #FFFFFF;
+
+
+  --font-merriweather: 'Merriweather', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+input, textarea {
+  outline: 0;
+}
+
+html {
+  box-sizing: border-box;
+  touch-action: manipulation;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: var(--accent-0);
+}
+
+html,
+body {
+  font-family: var(--font-inter) !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-x: none;
+  position: relative;
+
+  color: var(--accent-6);
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+  font-family: var(--font-poppins);
+  color: var(--accent-6);
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scroll::-webkit-scrollbar {
+  display: none;
+}
