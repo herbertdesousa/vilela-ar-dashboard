@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 
-import { Nav } from '@/components';
+import { Nav } from '@/@view/components/Nav';
 
-const Home: React.FC = () => {
+export default function Home() {
   return (
     <>
       <Head>
@@ -13,6 +13,4 @@ const Home: React.FC = () => {
       <Nav />
     </>
   );
-};
-
-export default Home;
+}
