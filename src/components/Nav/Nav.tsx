@@ -3,8 +3,9 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { MdAttachMoney, MdHome, MdDescription } from 'react-icons/md';
+import { MdAttachMoney, MdHome, MdDescription, MdLogout } from 'react-icons/md';
 
+import { useAuthManager } from '@/@view/managers/AuthManager';
 import style from './Nav.module.css';
 
 const pages = [
@@ -23,7 +24,8 @@ const pages = [
 ];
 
 const Nav: React.FC = () => {
-  const { push, pathname } = useRouter();
+  const { pathname } = useRouter();
+  const { signOut } = useAuthManager();
 
   return (
     <div className={style.root}>
@@ -44,6 +46,10 @@ const Nav: React.FC = () => {
           </li>
         ))}
       </ul>
+
+      <button type="button" className="mt-auto" onClick={signOut}>
+        <MdLogout />
+      </button>
     </div>
   );
 };
