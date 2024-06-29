@@ -47,7 +47,12 @@ const Nav: React.FC = () => {
         ))}
       </ul>
 
-      <button type="button" className="mt-auto" onClick={signOut}>
+      <button
+        id="logout-btn"
+        type="button"
+        className="mt-auto"
+        onClick={signOut}
+      >
         <MdLogout />
       </button>
     </div>
