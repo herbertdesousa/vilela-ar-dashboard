@@ -38,6 +38,7 @@ const DocumentEditorSideMenuGeneral: React.FC = () => {
 
       <div className="mt-10">
         <Select
+          selectId="document-type"
           name="type"
           label="Tipo"
           isRequired
@@ -89,6 +90,7 @@ const DocumentEditorSideMenuGeneral: React.FC = () => {
             data: layers.value.sort((a: any, b: any) => a.order - b.order),
             renderItem: (item: IDocumentFormDataLayers, index) => (
               <ListItem
+                id={item.title}
                 key={item.id}
                 title={(() => (
                   <div className="flex items-center">

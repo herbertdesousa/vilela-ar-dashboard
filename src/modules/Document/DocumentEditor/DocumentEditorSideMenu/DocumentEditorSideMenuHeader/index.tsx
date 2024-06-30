@@ -62,7 +62,7 @@ const DocumentEditorSideMenuHeader: React.FC = () => {
       style={{ width: 512 }}
     >
       <div className="flex items-center mb-10">
-        <button type="button" onClick={router.back}>
+        <button id="back-button" type="button" onClick={router.back}>
           <MdChevronLeft size={24} className="text-accent-6 mr-6" />
         </button>
         <h1 className="font-merriweather text-4xl font-bold">Cabeçalho</h1>

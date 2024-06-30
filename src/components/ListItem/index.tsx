@@ -6,6 +6,7 @@ import { IconType } from 'react-icons';
 import Dropdown, { IDropdownProps, IDropdownRef } from '../Dropdown';
 
 export interface IListItemProps {
+  id?: string;
   title: React.ReactNode | string;
   description?: React.ReactNode | string;
   rightComponent?: {
@@ -21,6 +22,7 @@ export interface IListItemProps {
 }
 
 const ListItem: React.FC<IListItemProps> = ({
+  id,
   title,
   onClick,
   description,
@@ -35,12 +37,14 @@ const ListItem: React.FC<IListItemProps> = ({
   return (
     <>
       <li
+        id={id}
         className={classNames(
           'flex justify-between items-center w-full relative',
           className,
         )}
       >
         <button
+          id={`${id}-btn`}
           type="button"
           onClick={onClick}
           className={`py-0.5 h-14 w-full

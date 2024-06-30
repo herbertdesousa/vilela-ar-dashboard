@@ -35,6 +35,7 @@ const DocumentListSideMenu: React.FC = () => {
         </h2>
 
         <Button
+          id="add-document"
           variant="outline"
           size="sm"
           leftIcon={MdAdd}

@@ -11,10 +11,12 @@ import { useAuthManager } from '@/@view/managers/AuthManager';
 
 const pages = [
   {
+    id: 'home-nav',
     href: '/',
     Icon: MdHome,
   },
   {
+    id: 'document-nav',
     href: '/documents',
     Icon: MdDescription,
   },
@@ -29,8 +31,8 @@ export function Nav() {
       <Image src="/logo.svg" height={40} width={40} />
 
       <ul className="mt-12">
-        {pages.map(({ href, Icon }) => (
-          <li key={href}>
+        {pages.map(({ id, href, Icon }) => (
+          <li id={id} key={href}>
             <Link href={href}>
               <div
                 className={classNames(

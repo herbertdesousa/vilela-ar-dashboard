@@ -35,7 +35,12 @@ const DocumentEditorNav: React.FC = () => {
           Sair
         </button>
 
-        <h1 className="font-merriweather text-2xl font-bold">{title}</h1>
+        <h1
+          className="font-merriweather text-2xl font-bold"
+          id="document-nav-title"
+        >
+          {title}
+        </h1>
       </div>
 
       <div className="flex">

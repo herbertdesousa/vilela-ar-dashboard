@@ -31,6 +31,8 @@ interface IProps {
   dropdownStyle?: React.CSSProperties;
   showClearField?: boolean;
 
+  selectId?: string;
+
   isRequired?: boolean;
   placeholder?: string;
   value?: string;
@@ -48,6 +50,7 @@ interface IProps {
 }
 
 const Select: React.FC<IProps> = ({
+  selectId,
   name,
   className,
   dropdownStyle,
@@ -249,6 +252,7 @@ const Select: React.FC<IProps> = ({
 
       <div ref={onClickOutsideRef}>
         <Button
+          id={selectId}
           onClick={openSelect}
           variant="outline"
           className={classNames('w-full h-10', buttonClassName)}

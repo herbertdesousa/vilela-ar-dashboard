@@ -56,7 +56,7 @@ const DocumentEditorSideMenuBlock: React.FC = () => {
           <MdChevronLeft size={24} className="text-accent-6" />
         </button>
 
-        <h1 className="font-merriweather text-lg font-bold">
+        <h1 id="tab-header" className="font-merriweather text-lg font-bold">
           {`Bloco ${romanFormat(blockIndex)}`}
         </h1>
 
@@ -94,6 +94,7 @@ const DocumentEditorSideMenuBlock: React.FC = () => {
 
       <div className="pb-16 px-10">
         <Select
+          selectId="select-name"
           name={`layers[${blockIndex}].title`}
           label="Nome"
           isRequired
@@ -118,6 +119,7 @@ const DocumentEditorSideMenuBlock: React.FC = () => {
           }}
         />
         <TextField
+          id="description-field"
           name={`layers[${blockIndex}].description`}
           label="Descrição"
           type="textarea"
@@ -125,6 +127,7 @@ const DocumentEditorSideMenuBlock: React.FC = () => {
           containerClassName="mt-4"
         />
         <TextField
+          id="price-field"
           name={`layers[${blockIndex}].price`}
           label="Valor (R$)"
           containerClassName="mt-4"
@@ -134,6 +137,7 @@ const DocumentEditorSideMenuBlock: React.FC = () => {
         />
         <ClosableList title="Materiais" containerClassName="mt-8">
           <Select
+            selectId="select-materials"
             name={`layers[${blockIndex}].materials`}
             label="Materiais"
             placeholder="Selecione os materiais"
@@ -157,8 +161,8 @@ const DocumentEditorSideMenuBlock: React.FC = () => {
             }}
           />
           <ul className="flex flex-wrap mt-2">
-            {(layers.value[blockIndex] as any).materials.map(item => (
-              <li key={item}>
+            {(layers.value[blockIndex] as any).materials.map((item, idx) => (
+              <li id={`material-${idx}`} key={item}>
                 <button
                   type="button"
                   className="flex items-center px-2 py-1 bg-accent-2 rounded mr-2 h-8 mt-2"
@@ -179,6 +183,7 @@ const DocumentEditorSideMenuBlock: React.FC = () => {
             data: (layers.value[blockIndex] as any).places,
             renderItem: (item: IDocumentFormDataLayersBlockPlace, idx) => (
               <ListItem
+                id={`${item.room}-${idx}`}
                 key={item.id}
                 title={`${
                   item.floor && item.room
