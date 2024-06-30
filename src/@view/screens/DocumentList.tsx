@@ -70,12 +70,18 @@ export function DocumentList() {
                       className={classNames(
                         'flex items-center',
                         'w-full px-3 py-1 rounded hover:bg-accent-1 transition text-left',
-                        'border border-accent-2 h-12',
+                        'border border-accent-2',
                       )}
                     >
-                      <strong className="text-accent-6 font-medium">
-                        {document.title}
-                      </strong>
+                      <div className="flex flex-col gap-y-1">
+                        <strong className="text-accent-6 font-medium">
+                          {document.title}
+                        </strong>
+
+                        <span className="text-sm text-accent-4">
+                          {document.createdDate}
+                        </span>
+                      </div>
 
                       {/* <div className="ml-auto">
                     <button

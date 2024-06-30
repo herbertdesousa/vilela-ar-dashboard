@@ -1,14 +1,21 @@
 import { DocumentListed } from '@/@domain/entities/Document';
 import { Usecases } from '@/@domain/usecases/Usecases';
+import { format } from 'date-fns';
 import { useEffect, useRef, useState } from 'react';
 
 const ITEMS_PER_PAGE = 10;
+
+type Document = {
+  id: string;
+  title: string;
+  createdDate: string;
+};
 
 export function useDocumentList() {
   const [page, setPage] = useState(0);
   const enableNext = useRef(true);
   const enablePrev = useRef(true);
-  const [documents, setDocuments] = useState<DocumentListed[]>([]);
+  const [documents, setDocuments] = useState<Document[]>([]);
 
   useEffect(() => {
     async function run() {
@@ -22,7 +29,16 @@ export function useDocumentList() {
         return;
       }
 
-      setDocuments(result.payload.data);
+      setDocuments(
+        result.payload.data.map(i => ({
+          id: i.id,
+          title: i.title,
+          createdDate:
+            i === null
+              ? '-'
+              : `Criado há ${format(i.createdDate, 'dd/MM/yyyy')}`,
+        })),
+      );
       enableNext.current = result.payload.enableNext;
       enablePrev.current = result.payload.enablePrev;
     }

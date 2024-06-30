@@ -5,6 +5,26 @@ export const DocumentModel = z.object({
 
   title: z.string().min(1),
 
-  // createdDate: z.coerce.date(),
+  layers: z.array(
+    z.discriminatedUnion('type', [
+      z.object({
+        id: z.string(),
+
+        type: z.literal('header'),
+
+        date: z.coerce.date(),
+      }),
+      z.object({
+        id: z.string(),
+
+        type: z.literal('block'),
+      }),
+      z.object({
+        id: z.string(),
+
+        type: z.literal('payment'),
+      }),
+    ]),
+  ),
 });
 export type DocumentModel = z.infer<typeof DocumentModel>;
