@@ -1,68 +1,41 @@
-import { createClient } from '@supabase/supabase-js';
-
 import { ExceptionHandler } from '@/@utils/ExceptionHandler';
 import { DefaultResultError, Result } from '@/@utils/Result';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-);
+import { z } from 'zod';
 
-type OnUserChangeReq = (
-  user: {
-    token: string;
-    email: string;
-  } | null,
-) => void;
-type OnUserChangeRes = Result<{}, DefaultResultError>;
+import { DocumentModel } from '../models/DocumentModel';
+import { LocalStorageDatasource } from '../datasources/LocalStorageDatasource';
 
-type SignInEmailPasswordReq = {
-  email: string;
-  password: string;
+type ListReq = {
+  page: number;
+  itemsPerPage: number;
 };
-type SignInEmailAndPasswordRes = Result<{}, DefaultResultError>;
+type ListRes = Result<
+  DocumentModel[],
+  DefaultResultError | { code: 'SERIALIZATION' }
+>;
 
-type SignOutRes = Result<{}, DefaultResultError>;
+const STORAGE_KEY = '@documents';
 
-export class AuthRepository {
+export class DocumentRepository {
+  constructor(private localStorage: LocalStorageDatasource) {}
+
   @ExceptionHandler()
-  async signOut(): Promise<SignOutRes> {
-    const { error } = await supabase.auth.signOut();
+  async list({ page, itemsPerPage }: ListReq): Promise<ListRes> {
+    const dataStr = this.localStorage.get(STORAGE_KEY);
 
-    if (error) {
-      return Result.Error({ code: 'UNKNOWN' });
+    if (!dataStr) {
+      return Result.Success([]);
     }
 
-    return Result.Success({});
-  }
+    const { success, data } = z.array(DocumentModel).safeParse(dataStr);
 
-  @ExceptionHandler()
-  async onUserChange(callback: OnUserChangeReq): Promise<OnUserChangeRes> {
-    supabase.auth.onAuthStateChange((_, session) => {
-      callback(
-        session
-          ? { token: session.access_token, email: session.user.email ?? '' }
-          : null,
-      );
-    });
-
-    return Result.Success({});
-  }
-
-  @ExceptionHandler()
-  async signInEmailAndPassword({
-    email,
-    password,
-  }: SignInEmailPasswordReq): Promise<SignInEmailAndPasswordRes> {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      return Result.Error({ code: 'UNKNOWN' });
+    if (!success) {
+      return Result.Error({ code: 'SERIALIZATION' });
     }
 
-    return Result.Success({});
+    const skipItems = page * itemsPerPage;
+
+    return Result.Success(data.slice(skipItems, skipItems + itemsPerPage));
   }
 }
