@@ -37,7 +37,7 @@ const DocumentEditorPreviewer: React.FC = () => {
         id="page"
         style={{
           width: 595,
-          zoom: 0.9,
+          zoom: pdf.isGeneratingPDF ? 1 : 0.9,
           height: DOCUMENT_HEIGHT,
           transform: `scale(${pdf.isGeneratingPDF ? '4, 4' : '1, 1'})`,
         }}
