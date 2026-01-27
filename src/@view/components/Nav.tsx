@@ -7,8 +7,6 @@ import classNames from 'classnames';
 
 import { MdHome, MdDescription, MdLogout } from 'react-icons/md';
 
-import { useAuthManager } from '@/@view/managers/AuthManager';
-
 const pages = [
   {
     id: 'home-nav',
@@ -24,7 +22,6 @@ const pages = [
 
 export function Nav() {
   const { pathname } = useRouter();
-  const { signOut } = useAuthManager();
 
   return (
     <div className="h-screen w-16 border-r border-accent-2 flex flex-col items-center py-6">
@@ -46,15 +43,6 @@ export function Nav() {
           </li>
         ))}
       </ul>
-
-      <button
-        id="logout-btn"
-        type="button"
-        className="mt-auto"
-        onClick={signOut}
-      >
-        <MdLogout />
-      </button>
     </div>
   );
 }

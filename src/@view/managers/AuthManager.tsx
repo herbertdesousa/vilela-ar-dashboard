@@ -1,10 +1,9 @@
 import { create } from 'zustand';
 
-import { User, UserLoading, UserUnauthed } from '@/@domain/entities/User';
-import { Usecases } from '@/@domain/usecases/Usecases';
+import { User, UserAuthed, UserUnauthed } from '@/@domain/entities/User';
 
 type Actions = {
-  signOut(): Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
 };
 
 type States = {
@@ -12,13 +11,15 @@ type States = {
 };
 
 export const useAuthManager = create<Actions & States>(set => {
-  Usecases.auth.onUserChange.execute(user => set({ user }));
-
   return {
-    user: new UserLoading(),
-    signOut: async () => {
-      set({ user: new UserUnauthed() });
-      await Usecases.auth.signOut.execute();
+    user: new UserUnauthed(),
+    signIn: async (email: string, password: string) => {
+      if (email !== 'hbt@email.com' && password === '123456') {
+        alert('Email e/ou Senha Inválido');
+        return;
+      }
+
+      set({ user: new UserAuthed(email, password) });
     },
   };
 });

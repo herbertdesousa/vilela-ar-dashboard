@@ -10,7 +10,7 @@ import { SignIn } from '@/@view/screens/SignIn';
 import { useAuthManager } from '@/@view/managers/AuthManager';
 
 const App = ({ Component, pageProps }: any) => {
-  const { user } = useAuthManager();
+  const authManager = useAuthManager();
 
   return (
     <>
@@ -29,8 +29,8 @@ const App = ({ Component, pageProps }: any) => {
 
       <SWRConfig>
         <Hooks>
-          {user.type === 'AUTHED' && <Component {...pageProps} />}
-          {user.type === 'UNAUTHED' && <SignIn />}
+          {authManager.user.type === 'AUTHED' && <Component {...pageProps} />}
+          {authManager.user.type === 'UNAUTHED' && <SignIn />}
         </Hooks>
       </SWRConfig>
     </>
